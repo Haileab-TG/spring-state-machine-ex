@@ -34,7 +34,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public StateMachine<PaymentState, PaymentEvent> preAuth(Long paymentId) {
         var stateMachine = build(paymentId);
-        sendEvent(paymentId, PaymentEvent.PRE_AUTH_APPROVED, stateMachine);
+        sendEvent(paymentId, PaymentEvent.PRE_AUTHORIZE, stateMachine);
         return stateMachine;
     }
 
@@ -50,7 +50,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public StateMachine<PaymentState, PaymentEvent> decline(Long paymentId) {
         var stateMachine = build(paymentId);
-        sendEvent(paymentId, PaymentEvent.PRE_AUTH_DECLINED, stateMachine);
+        sendEvent(paymentId, PaymentEvent.AUTH_DECLINED, stateMachine);
         return stateMachine;
     }
 
