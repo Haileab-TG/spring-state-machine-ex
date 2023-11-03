@@ -3,11 +3,11 @@ package io.htg.ssm.service;
 import io.htg.ssm.model.Payment;
 import io.htg.ssm.model.PaymentEvent;
 import io.htg.ssm.model.PaymentState;
-import org.springframework.statemachine.listener.StateMachineListener;
+import org.springframework.statemachine.StateMachine;
 
 public interface PaymentService {
     Payment newPayment();
-    StateMachineListener<PaymentState, PaymentEvent> preAuth(Long paymentId);
-    StateMachineListener<PaymentState, PaymentEvent> authorize(Long paymentId);
-    StateMachineListener<PaymentState, PaymentEvent> decline(Long paymentId);
+    StateMachine<PaymentState, PaymentEvent> preAuth(Long paymentId);
+    StateMachine<PaymentState, PaymentEvent> authorize(Long paymentId);
+    StateMachine<PaymentState, PaymentEvent> decline(Long paymentId);
 }

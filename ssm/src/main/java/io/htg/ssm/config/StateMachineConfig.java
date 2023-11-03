@@ -19,6 +19,7 @@ import java.util.EnumSet;
 @EnableStateMachineFactory
 @Configuration
 public class StateMachineConfig extends StateMachineConfigurerAdapter<PaymentState, PaymentEvent> {
+
     @Override
     public void configure(StateMachineStateConfigurer<PaymentState, PaymentEvent> states) throws Exception {
         states.withStates()
