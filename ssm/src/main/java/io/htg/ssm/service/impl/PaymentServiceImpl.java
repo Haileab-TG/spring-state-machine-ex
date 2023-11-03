@@ -24,13 +24,11 @@ public class PaymentServiceImpl implements PaymentService {
 
     public final static String PAYMENT_ID_HEADER = "payment-id";
 
-    @Transactional
     @Override
     public Payment newPayment() {
         return null;
     }
 
-    @Transactional
     @Override
     public StateMachine<PaymentState, PaymentEvent> preAuth(Long paymentId) {
         var stateMachine = build(paymentId);
@@ -38,15 +36,13 @@ public class PaymentServiceImpl implements PaymentService {
         return stateMachine;
     }
 
-    @Transactional
     @Override
     public StateMachine<PaymentState, PaymentEvent> authorize(Long paymentId) {
         var stateMachine = build(paymentId);
-        sendEvent(paymentId, PaymentEvent.AUTH_APPROVED, stateMachine);
+        sendEvent(paymentId, PaymentEvent.AUTH, stateMachine);
         return stateMachine;
     }
 
-    @Transactional
     @Override
     public StateMachine<PaymentState, PaymentEvent> decline(Long paymentId) {
         var stateMachine = build(paymentId);

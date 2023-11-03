@@ -30,15 +30,24 @@ class PaymentServiceImplTest {
                 .build();
     }
 
-    @Transactional
     @Test
     void preAuth() {
         payment.setState(PaymentState.NEW);
-        paymentRepo.save(payment);
+        payment = paymentRepo.save(payment);
         System.out.println("State before preAuth " + payment.getState());
         System.out.println(payment.getId());
         paymentService.preAuth(payment.getId());
         payment = paymentRepo.findById(payment.getId()).get();
         System.out.println("State after preAuth " + payment.getState());
     }
+
+    @Test
+    void authorize(){
+        payment.setState(PaymentState.PRE_AUTH);
+        payment = paymentRepo.save(payment);
+        paymentService.authorize(payment.getId());
+        payment = paymentRepo.findById(payment.getId()).get();
+        System.out.println("State after AUTH " + payment.getState());
+    }
+
 }
